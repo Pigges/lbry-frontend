@@ -25,7 +25,7 @@ const defaultState: UserState = {
   invitees: undefined,
   referralLink: undefined,
   referralCode: undefined,
-  user: { has_verified_email: false },
+  user: undefined,
   accessToken: undefined,
   youtubeChannelImportPending: false,
   youtubeChannelImportErrorMessage: '',
@@ -36,7 +36,6 @@ const defaultState: UserState = {
   homepageFetched: false,
 };
 
-// does this do anything with user?
 reducers[ACTIONS.AUTHENTICATION_STARTED] = (state) =>
   Object.assign({}, state, {
     authenticationIsPending: true,
@@ -65,6 +64,7 @@ reducers[ACTIONS.AUTHENTICATION_FAILURE] = (state) =>
   Object.assign({}, state, {
     authenticationIsPending: false,
     userIsPending: false,
+    user: null,
   });
 
 reducers[ACTIONS.USER_FETCH_STARTED] = (state) =>
