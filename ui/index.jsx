@@ -14,7 +14,7 @@ import * as MODALS from 'constants/modal_types';
 import React, { Fragment, useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { doLbryReady, doAutoUpdate, doOpenModal, doHideModal, doToggle3PAnalytics } from 'redux/actions/app';
+import { doLbryReady, doAutoUpdate, doOpenModal, doHideModal, doToggle3PAnalytics, doSignOut } from 'redux/actions/app';
 import Lbry, { apiCall } from 'lbry';
 import { isURIValid } from 'util/lbryURI';
 import { setSearchApi } from 'redux/actions/search';
@@ -222,15 +222,29 @@ function AppWrapper() {
   const [keycloakReady, setKeycloakReady] = useState(false);
 
   const onKeycloakEvent = (event, error) => {
-    // console.log('onKeycloakEvent:', event, error, keycloak);
-    if (event === 'onReady') {
-      setKeycloakReady(true);
+    console.warn('onKeycloakEvent:', event, error || '');
+
+    switch (event) {
+      case 'onReady':
+        setKeycloakReady(true);
+        break;
+      case 'onInitError':
+      case 'onAuthSuccess':
+      case 'onAuthError':
+      case 'onAuthRefreshSuccess':
+      case 'onTokenExpired':
+        // TODO SSO: should do something
+        break;
+      case 'onAuthRefreshError':
+      case 'onAuthLogout':
+        doSignOut();
+        break;
     }
   };
 
   const onKeycloakTokens = (tokens) => {
     // TODO: Add flow -- token: { idToken: string, refreshToken: string, token: string }
-    // console.log('onKeycloakTokens:', tokens);
+    console.warn('onKeycloakTokens:', tokens);
   };
 
   useEffect(() => {
