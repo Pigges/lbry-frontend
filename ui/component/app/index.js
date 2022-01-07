@@ -24,7 +24,7 @@ import { selectUploadCount } from 'redux/selectors/publish';
 import { doSetLanguage } from 'redux/actions/settings';
 import { doSyncLoop } from 'redux/actions/sync';
 import { doDownloadUpgradeRequested, doSignIn, doSetActiveChannel, doSetIncognito } from 'redux/actions/app';
-import { doFetchModBlockedList, doFetchCommentModAmIList } from 'redux/actions/comments';
+import { doFetchModBlockedList, doFetchCommentModAmIList, doChannelStatus } from 'redux/actions/comments';
 import App from './view';
 
 const select = (state) => ({
@@ -61,6 +61,7 @@ const perform = (dispatch) => ({
   setIncognito: () => dispatch(doSetIncognito()),
   fetchModBlockedList: () => dispatch(doFetchModBlockedList()),
   fetchModAmIList: () => dispatch(doFetchCommentModAmIList()),
+  doChannelStatus: (sign) => dispatch(doChannelStatus(sign)),
 });
 
 export default hot(connect(select, perform)(App));
