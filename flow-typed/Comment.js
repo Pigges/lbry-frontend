@@ -180,8 +180,8 @@ declare type CommentPinParams = {
   channel_id: string,
   channel_name: string,
   remove?: boolean,
-  signature: string,
-  signing_ts: string,
+  signature?: string,
+  signing_ts?: string,
 };
 
 declare type CommentPinResponse = {
@@ -191,8 +191,8 @@ declare type CommentPinResponse = {
 declare type CommentEditParams = {
   comment: string,
   comment_id: string,
-  signature: string,
-  signing_ts: string,
+  signature?: string,
+  signing_ts?: string,
 };
 
 declare type CommentEditResponse = Comment;
@@ -216,8 +216,8 @@ declare type CommentCreateParams = {
   comment: string,
   claim_id: string,
   parent_id?: string,
-  signature: string,
-  signing_ts: string,
+  signature?: string,
+  signing_ts?: string,
   support_tx_id?: string,
   mentioned_channels?: Array<MentionedChannel>,
 };
@@ -313,8 +313,8 @@ declare type SettingsResponse = {
 declare type UpdateSettingsParams = {
   channel_name: string,
   channel_id: string,
-  signature: string,
-  signing_ts: string,
+  signature?: string,
+  signing_ts?: string,
   comments_enabled?: boolean,
   min_tip_amount_comment?: number,
   min_tip_amount_super_chat?: number,
