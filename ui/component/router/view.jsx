@@ -163,7 +163,7 @@ function PrivateRoute(props: PrivateRouteProps) {
         ) : (
           <Redirect
             to={{
-              pathname: `/$/${PAGES.OAUTH}?redirect=${redirectUrl || props.location.pathname}`,
+              pathname: `/$/${PAGES.OAUTH_LOGIN}?redirect=${redirectUrl || props.location.pathname}`,
               state: { from: props.location },
             }}
           />
@@ -308,7 +308,7 @@ function AppRouter(props: Props) {
         <Route path={`/$/${PAGES.AUTH_PASSWORD_SET}`} exact component={PasswordSetPage} />
         <Route path={`/$/${PAGES.AUTH}`} exact component={SignUpPage} />
         <Route path={`/$/${PAGES.AUTH}/*`} exact component={SignUpPage} />
-        <Route path={`/$/${PAGES.OAUTH}`} exact component={OAuthPage} />
+        <Route path={`/$/${PAGES.OAUTH_LOGIN}`} exact component={OAuthPage} />
 
         <Route path={`/$/${PAGES.HELP}`} exact component={HelpPage} />
         {/* @if TARGET='app' */}

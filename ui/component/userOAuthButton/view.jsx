@@ -18,7 +18,7 @@ export default function UserOAuthButton(props: Props) {
       {!keycloakReady || user === undefined ? (
         <Skeleton variant="text" animation="wave" className="header__navigationItem--balanceLoading" />
       ) : (
-        <Button navigate={`/$/${PAGES.OAUTH}`} button="primary" label={__('Log In')} disabled={user === null} />
+        <Button navigate={`/$/${PAGES.OAUTH_LOGIN}`} button="link" label={__('Log In')} disabled={user === null} />
       )}
     </>
   );

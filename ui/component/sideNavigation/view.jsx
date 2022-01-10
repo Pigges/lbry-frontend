@@ -13,7 +13,6 @@ import NotificationBubble from 'component/notificationBubble';
 import DebouncedInput from 'component/common/debounced-input';
 import I18nMessage from 'component/i18nMessage';
 import ChannelThumbnail from 'component/channelThumbnail';
-import UserOAuthButton from 'component/userOAuthButton';
 import { useIsMobile, useIsLargeScreen, isTouch } from 'effects/use-screensize';
 import { GetLinksData } from 'util/buildHomepage';
 import { DOMAIN, ENABLE_UI_NOTIFICATIONS, ENABLE_NO_SOURCE_CLAIMS } from 'config';
@@ -98,7 +97,7 @@ const PREMIUM: SideNavLink = {
 const UNAUTH_LINKS: Array<SideNavLink> = [
   {
     title: 'Log In',
-    link: `/$/${PAGES.AUTH_SIGNIN}`,
+    link: `/$/${PAGES.OAUTH_LOGIN}`,
     icon: ICONS.SIGN_IN,
   },
   {
@@ -465,7 +464,12 @@ function SideNavigation(props: Props) {
             Sign up to earn %lbc% for you and your favorite creators.
           </I18nMessage>
         </span>
-        <UserOAuthButton />
+        <Button
+          button="secondary"
+          label={__('Sign Up')}
+          navigate={`/$/${PAGES.AUTH}?src=sidenav_nudge`}
+          disabled={user === null}
+        />{' '}
       </div>
     );
 

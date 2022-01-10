@@ -68,7 +68,7 @@ export default function HeaderProfileMenuButton(props: HeaderMenuButtonProps) {
             </>
           ) : (
             <>
-              <HeaderMenuLink page={PAGES.AUTH_SIGNIN} icon={ICONS.SIGN_IN} name={__('Log In')} />
+              <HeaderMenuLink page={PAGES.OAUTH_LOGIN} icon={ICONS.SIGN_IN} name={__('Log In')} />
               <HeaderMenuLink page={PAGES.AUTH} icon={ICONS.SIGN_UP} name={__('Sign Up')} />
               <HeaderMenuLink page={PAGES.SETTINGS} icon={ICONS.SETTINGS} name={__('Settings')} />
               <HeaderMenuLink page={PAGES.HELP} icon={ICONS.HELP} name={__('Help')} />
