@@ -78,7 +78,6 @@ const LivestreamCurrentPage = lazyImport(() =>
 const OdyseeMembershipPage = lazyImport(() =>
   import('page/odyseeMembership' /* webpackChunkName: "odyseeMembership" */)
 );
-const OAuthPage = lazyImport(() => import('page/oauth' /* webpackChunkName: "oauth" */));
 const OwnComments = lazyImport(() => import('page/ownComments' /* webpackChunkName: "ownComments" */));
 const PasswordResetPage = lazyImport(() => import('page/passwordReset' /* webpackChunkName: "passwordReset" */));
 const PasswordSetPage = lazyImport(() => import('page/passwordSet' /* webpackChunkName: "passwordSet" */));
@@ -163,7 +162,7 @@ function PrivateRoute(props: PrivateRouteProps) {
         ) : (
           <Redirect
             to={{
-              pathname: `/$/${PAGES.OAUTH_LOGIN}?redirect=${redirectUrl || props.location.pathname}`,
+              pathname: `/$/${PAGES.AUTH_SIGNIN}?redirect=${redirectUrl || props.location.pathname}`,
               state: { from: props.location },
             }}
           />
@@ -308,7 +307,6 @@ function AppRouter(props: Props) {
         <Route path={`/$/${PAGES.AUTH_PASSWORD_SET}`} exact component={PasswordSetPage} />
         <Route path={`/$/${PAGES.AUTH}`} exact component={SignUpPage} />
         <Route path={`/$/${PAGES.AUTH}/*`} exact component={SignUpPage} />
-        <Route path={`/$/${PAGES.OAUTH_LOGIN}`} exact component={OAuthPage} />
 
         <Route path={`/$/${PAGES.HELP}`} exact component={HelpPage} />
         {/* @if TARGET='app' */}
