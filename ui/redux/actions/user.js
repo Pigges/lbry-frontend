@@ -193,7 +193,7 @@ export function doAuthenticate(
       Lbryio.getTokens().then((tokens) => {
         dispatch({
           type: ACTIONS.AUTHENTICATION_SUCCESS,
-          data: { user, authToken: tokens.auth_token, accessToken: tokens.access_token },
+          data: { user },
         });
 
         // if user is an Odysee member, get the membership details
