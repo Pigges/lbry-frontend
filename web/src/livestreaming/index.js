@@ -1,7 +1,7 @@
 // @flow
 
 import Lbry from 'lbry';
-import { LIVESTREAM_KILL, LIVESTREAM_LIVE_API } from 'constants/livestream';
+import { LIVESTREAM_KILL, NEW_LIVESTREAM_LIVE_API } from 'constants/livestream';
 import { toHex } from 'util/hex';
 
 type StreamData = {
@@ -46,7 +46,7 @@ export const killStream = async (channelId: string, channelName: string) => {
 
 export const isLiveStreaming = async (channelId: string): Promise<boolean> => {
   try {
-    const response = await fetch(`${LIVESTREAM_LIVE_API}/${channelId}?1`);
+    const response = await fetch(`${NEW_LIVESTREAM_LIVE_API}?channel_claim_id=${channelId}`);
     const stream = await response.json();
     return stream.data?.live;
   } catch {

@@ -1,5 +1,5 @@
 // @flow
-import { LIVESTREAM_LIVE_API, LIVESTREAM_KILL, LIVESTREAM_STARTS_SOON_BUFFER } from 'constants/livestream';
+import { NEW_LIVESTREAM_LIVE_API, LIVESTREAM_KILL, LIVESTREAM_STARTS_SOON_BUFFER } from 'constants/livestream';
 import { toHex } from 'util/hex';
 import Lbry from 'lbry';
 import moment from 'moment';
@@ -69,25 +69,24 @@ export function getTipValues(superChatsByAmount: Array<Comment>) {
 
 const transformLivestreamData = (data: Array<any>): LivestreamInfo => {
   return data.reduce((acc, curr) => {
-    acc[curr.claimId] = {
-      url: curr.url,
-      type: curr.type,
-      live: curr.live,
-      viewCount: curr.viewCount,
-      creatorId: curr.claimId,
-      startedStreaming: moment(curr.timestamp),
+    acc[curr.ChannelClaimID] = {
+      url: curr.VideoURL,
+      type: 'application/x-mpegurl',
+      live: curr.Live,
+      viewCount: curr.ViewerCount,
+      creatorId: curr.ChannelClaimID,
+      startedStreaming: moment(curr.Start),
     };
     return acc;
   }, {});
 };
 
 export const fetchLiveChannels = async (): Promise<LivestreamInfo> => {
-  const response = await fetch(LIVESTREAM_LIVE_API);
-  const json = await response.json();
+  const newApiResponse = await fetch(`${NEW_LIVESTREAM_LIVE_API}/all`);
+  const newApiData = (await newApiResponse.json()).data;
+  if (!newApiData) throw new Error();
 
-  if (!json.data) throw new Error();
-
-  return transformLivestreamData(json.data);
+  return transformLivestreamData(newApiData);
 };
 
 /**
@@ -96,25 +95,14 @@ export const fetchLiveChannels = async (): Promise<LivestreamInfo> => {
  * @returns {Promise<{channelStatus: string}|{channelData: LivestreamInfo, channelStatus: string}>}
  */
 export const fetchLiveChannel = async (channelId: string): Promise<LiveChannelStatus> => {
-  const newApiEndpoint = LIVESTREAM_LIVE_API;
-  const newApiResponse = await fetch(`${newApiEndpoint}/${channelId}?1`);
+  const newApiResponse = await fetch(`${NEW_LIVESTREAM_LIVE_API}/is_live?channel_claim_id=${channelId}`);
   const newApiData = (await newApiResponse.json()).data;
-  const isLive = newApiData.live;
-
-  // transform data to old API standard
-  const translatedData = {
-    url: newApiData.url,
-    type: 'application/x-mpegurl',
-    viewCount: newApiData.viewCount,
-    claimId: newApiData.claimId,
-    timestamp: newApiData.timestamp,
-  };
 
   try {
-    if (isLive === false) {
+    if (newApiData.Live === false) {
       return { channelStatus: LiveStatus.NOT_LIVE };
     }
-    return { channelStatus: LiveStatus.LIVE, channelData: transformLivestreamData([translatedData]) };
+    return { channelStatus: LiveStatus.LIVE, channelData: transformLivestreamData([newApiData]) };
   } catch {
     return { channelStatus: LiveStatus.UNKNOWN };
   }

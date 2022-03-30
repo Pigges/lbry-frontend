@@ -4,7 +4,6 @@ import React from 'react';
 import { SITE_HELP_EMAIL } from 'config';
 import Button from 'component/button';
 import { killStream } from '$web/src/livestreaming';
-import watchLivestreamStatus from '$web/src/livestreaming/long-polling';
 import 'scss/component/claim-preview-reset.scss';
 
 type Props = {
@@ -12,19 +11,13 @@ type Props = {
   channelName: string,
   claimIsMine: boolean,
   doToast: ({ message: string, isError?: boolean }) => void,
+  activeLivestreamForChannel: any,
 };
 
 const ClaimPreviewReset = (props: Props) => {
-  const { channelId, channelName, claimIsMine, doToast } = props;
+  const { channelId, channelName, claimIsMine, doToast, activeLivestreamForChannel } = props;
 
-  const [isLivestreaming, setIsLivestreaming] = React.useState(false);
-
-  React.useEffect(() => {
-    if (!claimIsMine) return;
-    return watchLivestreamStatus(channelId, (state) => setIsLivestreaming(state));
-  }, [channelId, setIsLivestreaming, claimIsMine]);
-
-  if (!claimIsMine || !isLivestreaming) return null;
+  if (!claimIsMine || !activeLivestreamForChannel) return null;
 
   const handleClick = async () => {
     try {
@@ -36,20 +29,23 @@ const ClaimPreviewReset = (props: Props) => {
   };
 
   return (
-    <p className={'claimPreviewReset'}>
-      <span className={'claimPreviewReset__hint'}>
-        {__(
-          "If you're having trouble starting a stream or if your stream shows that you're live but aren't, try a reset. If the problem persists, please reach out at %SITE_HELP_EMAIL%.",
-          { SITE_HELP_EMAIL }
-        )}
-      </span>
-      <Button
-        button="primary"
-        label={__('Reset stream')}
-        className={'claimPreviewReset__button'}
-        onClick={handleClick}
-      />
-    </p>
+    // disabled for now
+    false && (
+      <p className={'claimPreviewReset'}>
+        <span className={'claimPreviewReset__hint'}>
+          {__(
+            "If you're having trouble starting a stream or if your stream shows that you're live but aren't, try a reset. If the problem persists, please reach out at %SITE_HELP_EMAIL%.",
+            { SITE_HELP_EMAIL }
+          )}
+        </span>
+        <Button
+          button="primary"
+          label={__('Reset stream')}
+          className={'claimPreviewReset__button'}
+          onClick={handleClick}
+        />
+      </p>
+    )
   );
 };
 

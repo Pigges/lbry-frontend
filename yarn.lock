@@ -2195,10 +2195,10 @@
     mux.js "5.13.0"
     video.js "^6 || ^7"
 
-"@videojs/http-streaming@2.13.1":
-  version "2.13.1"
-  resolved "https://registry.yarnpkg.com/@videojs/http-streaming/-/http-streaming-2.13.1.tgz#b7688d91eec969181430e00868b514b16b3b21b7"
-  integrity sha512-1x3fkGSPyL0+iaS3/lTvfnPTtfqzfgG+ELQtPPtTvDwqGol9Mx3TNyZwtSTdIufBrqYRn7XybB/3QNMsyjq13A==
+"@videojs/http-streaming@2.14.0":
+  version "2.14.0"
+  resolved "https://registry.yarnpkg.com/@videojs/http-streaming/-/http-streaming-2.14.0.tgz#dcb786296a640c67e77f7bb7488251bc243eb005"
+  integrity sha512-hsCy9QBsC753AEfy1AUKSv9MuztkAKKofGhSfXj+ToHFlqyutNMYk5B8PUkz2M21sOufuYpMMq5G3bwy4KAnxQ==
   dependencies:
     "@babel/runtime" "^7.12.5"
     "@videojs/vhs-utils" "3.0.4"
@@ -17293,13 +17293,12 @@ vfile@^2.0.0:
     videojs-font "3.2.0"
     videojs-vtt.js "^0.15.3"
 
-video.js@^7.18.1:
-  version "7.18.1"
-  resolved "https://registry.yarnpkg.com/video.js/-/video.js-7.18.1.tgz#d93cd4992710d4d95574a00e7d29a2518f9b30f7"
-  integrity sha512-mnXdmkVcD5qQdKMZafDjqdhrnKGettZaGSVkExjACiylSB4r2Yt5W1bchsKmjFpfuNfszsMjTUnnoIWSSqoe/Q==
+"video.js@https://github.com/OdyseeTeam/video-js-built-fork.git":
+  version "7.19.0"
+  resolved "https://github.com/OdyseeTeam/video-js-built-fork.git#04622ae1f7ad6ded7fa8cb0df023888cf76fc25e"
   dependencies:
     "@babel/runtime" "^7.12.5"
-    "@videojs/http-streaming" "2.13.1"
+    "@videojs/http-streaming" "2.14.0"
     "@videojs/vhs-utils" "^3.0.4"
     "@videojs/xhr" "2.6.0"
     aes-decrypter "3.1.2"
