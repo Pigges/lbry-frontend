@@ -160,57 +160,6 @@ const PrivacyPolicyPage = () => {
             </p>
 
             <p>
-              <strong>Google</strong>
-            </p>
-            <p>
-              {' '}
-              As part of Odysee YouTube Sync Verification, we will only use read-only access to verify the ownership of
-              YouTube channels and will not transfer this data to others unless doing so is necessary to comply with
-              applicable law, or as part of a merger, acquisition, or sale of assets.
-            </p>
-
-            <p>
-              Google's advertising requirements can be summed up by Google's Advertising Principles. They are put in
-              place to provide a positive experience for users.{' '}
-              <code>https://support.google.com/adwordspolicy/answer/1316548?hl=en</code>
-            </p>
-
-            <p>We use Google AdSense Advertising on our website.</p>
-
-            <p>
-              Google, as a third-party vendor, uses cookies to serve ads on our site. Google's use of the DART cookie
-              enables it to serve ads to our users based on previous visits to our site and other sites on the Internet.
-              Users may opt-out of the use of the DART cookie by visiting the Google Ad and Content Network privacy
-              policy.
-            </p>
-
-            <p>
-              <strong>We have implemented the following:</strong>
-            </p>
-
-            <ul>
-              <li>Remarketing with Google AdSense</li>
-              <li>Google Display Network Impression Reporting</li>
-              <li>Demographics and Interests Reporting</li>
-            </ul>
-
-            <p>
-              We, along with third-party vendors such as Google use first-party cookies (such as the Google Analytics
-              cookies) and third-party cookies (such as the DoubleClick cookie) or other third-party identifiers
-              together to compile data regarding user interactions with ad impressions and other ad service functions as
-              they relate to our website.
-            </p>
-
-            <p>
-              <strong>Opting out:</strong>
-            </p>
-            <p>
-              Users can set preferences for how Google advertises to you using the Google Ad Settings page.
-              Alternatively, you can opt out by visiting the Network Advertising Initiative Opt Out page or by using the
-              Google Analytics Opt Out Browser add on.
-            </p>
-
-            <p>
               <strong>California Online Privacy Protection Act</strong>
             </p>
 

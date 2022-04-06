@@ -41,7 +41,6 @@ export const BrowserNotificationHints = () => {
             "On Firefox, notifications won't function if cookies are set to clear on browser close. Please disable or add an exception for Odysee, then refresh."
           )}
         </li>
-        <li>{__('For Brave, enable google push notifications in settings.')}</li>
         <li>{__('Check browser settings to see if notifications are disabled or otherwise restricted.')}</li>
       </ul>
     </InlineMessage>
