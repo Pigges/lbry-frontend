@@ -7,7 +7,6 @@ import HiddenNsfwClaims from 'component/hiddenNsfwClaims';
 import { useHistory } from 'react-router-dom';
 import Button from 'component/button';
 import ClaimListDiscover from 'component/claimListDiscover';
-// import Ads from 'web/component/ads';
 import Icon from 'component/common/icon';
 import LivestreamLink from 'component/livestreamLink';
 import { Form, FormField } from 'component/common/form';
@@ -156,7 +155,6 @@ function ChannelContent(props: Props) {
           defaultOrderBy={CS.ORDER_BY_NEW}
           pageSize={defaultPageSize}
           infiniteScroll={defaultInfiniteScroll}
-          // injectedItem={SHOW_ADS && !isAuthenticated && IS_WEB && <Ads type="video" />}
           meta={
             showFilters && (
               <Form onSubmit={() => {}} className="wunderbar--inline">
