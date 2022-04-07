@@ -309,7 +309,7 @@ function PublishForm(props: Props) {
                   dataItem.Status.toLowerCase() === 'inprogress'
                     ? __('Processing...(') + dataItem.PercentComplete + '%)'
                     : (dataItem.Duration / 1000000000).toString(),
-                thumbnails: [dataItem.ThumbnailURL],
+                thumbnails: dataItem.ThumbnailURLs !== null ? dataItem.ThumbnailURLs : [],
                 uploadedAt: dataItem.Created,
               },
             };
