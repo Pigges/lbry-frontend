@@ -53,34 +53,6 @@
       $width: calc(var(--file-list-thumbnail-width) * 1.2);
       width: $width;
     }
-
-    div[style*='transform-origin: left bottom'] {
-      // [Floating ad]
-      // Hide for now since can't get it to work in a consistent manner between:
-      //   - EU and non-EU version
-      //   - issues in Firefox
-      display: none !important;
-    }
-
-    #aniBox {
-      transition: unset !important;
-    }
-
-    #aniBox[style*='height: 1px'] {
-      display: none;
-    }
-
-    #aniBox,
-    #av-container {
-      width: 100% !important;
-      height: unset !important;
-      aspect-ratio: 16 / 9 !important;
-      border-radius: var(--border-radius);
-    }
-
-    .avp-p-wrapper > div {
-      border-radius: var(--border-radius) !important; // Needed for EU only
-    }
   }
 }
 
