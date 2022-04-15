@@ -1,11 +1,13 @@
 // @flow
-import { SHOW_ADS } from 'config';
 import * as PAGES from 'constants/pages';
 import React, { useEffect } from 'react';
 import I18nMessage from 'component/i18nMessage';
 import Button from 'component/button';
 import classnames from 'classnames';
+import useShouldShowAds from 'effects/use-should-show-ads';
 import { platform } from 'util/platform';
+
+const USE_ADNIMATION = true;
 
 // prettier-ignore
 const AD_CONFIGS = Object.freeze({
@@ -21,70 +23,44 @@ const AD_CONFIGS = Object.freeze({
     url: 'https://tg1.vidcrunch.com/api/adserver/spt?AV_TAGID=61dff05c599f1e20b01085d4&AV_PUBLISHERID=6182c8993c8ae776bd5635e9',
     tag: 'AV61dff05c599f1e20b01085d4',
   },
+  ADNIMATION: {
+    url: 'https://tg1.aniview.com/api/adserver/spt?AV_TAGID=6252bb6f28951333ec10a7a6&AV_PUBLISHERID=601d9a7f2e688a79e17c1265',
+    tag: 'AV6252bb6f28951333ec10a7a6',
+  },
 });
 
-// Internal use only. One-time update flag.
-let ad_blocker_detected;
-
-type Props = {
-  type: string,
-  tileLayout?: boolean,
-  small: boolean,
-  claim: Claim,
-  isMature: boolean,
-  userHasPremiumPlus: boolean,
-  className?: string,
-  doSetAdBlockerFound: (boolean) => void,
-};
+// ****************************************************************************
+// Helpers
+// ****************************************************************************
 
 function removeIfExists(querySelector) {
   const element = document.querySelector(querySelector);
   if (element) element.remove();
 }
 
+function resolveVidcrunchConfig() {
+  const mobileAds = platform.isAndroid() || platform.isIOS();
+  const isInEu = localStorage.getItem('gdprRequired') === 'true';
+  return isInEu ? AD_CONFIGS.EU : mobileAds ? AD_CONFIGS.MOBILE : AD_CONFIGS.DEFAULT;
+}
+
+// ****************************************************************************
+// Ads
+// ****************************************************************************
+
+type Props = {
+  type: string,
+  tileLayout?: boolean,
+  small: boolean,
+  userHasPremiumPlus: boolean,
+  className?: string,
+  doSetAdBlockerFound: (boolean) => void,
+};
+
 function Ads(props: Props) {
   const { type = 'video', tileLayout, small, userHasPremiumPlus, className, doSetAdBlockerFound } = props;
-
-  const [shouldShowAds, setShouldShowAds] = React.useState(resolveAdVisibility());
-  const mobileAds = platform.isAndroid() || platform.isIOS();
-
-  // this is populated from app based on location
-  const isInEu = localStorage.getItem('gdprRequired') === 'true';
-  const adConfig = isInEu ? AD_CONFIGS.EU : mobileAds ? AD_CONFIGS.MOBILE : AD_CONFIGS.DEFAULT;
-
-  function resolveAdVisibility() {
-    // 'ad_blocker_detected' will be undefined at startup. Wait until we are
-    // sure it is not blocked (i.e. === false) before showing the component.
-    return ad_blocker_detected === false && SHOW_ADS && !userHasPremiumPlus;
-  }
-
-  useEffect(() => {
-    if (ad_blocker_detected === undefined) {
-      let mounted = true;
-      const GOOGLE_AD_URL = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
-
-      fetch(GOOGLE_AD_URL)
-        .then((response) => {
-          const detected = response.redirected === true;
-          window.odysee_ad_blocker_detected = detected;
-          ad_blocker_detected = detected;
-          doSetAdBlockerFound(detected);
-        })
-        .catch(() => {
-          ad_blocker_detected = true;
-          doSetAdBlockerFound(true);
-        })
-        .finally(() => {
-          if (mounted) {
-            setShouldShowAds(resolveAdVisibility());
-          }
-        });
-
-      return () => {
-        mounted = false;
-      };
-    }
-  }, []);
+  const shouldShowAds = useShouldShowAds(userHasPremiumPlus, doSetAdBlockerFound);
+  const adConfig = USE_ADNIMATION ? AD_CONFIGS.ADNIMATION : resolveVidcrunchConfig();
 
   // add script to DOM
   useEffect(() => {

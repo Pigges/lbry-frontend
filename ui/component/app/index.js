@@ -2,13 +2,7 @@ import { hot } from 'react-hot-loader/root';
 import { connect } from 'react-redux';
 import { selectGetSyncErrorMessage, selectSyncFatalError, selectSyncIsLocked } from 'redux/selectors/sync';
 import { doUserSetReferrer } from 'redux/actions/user';
-import {
-  selectOdyseeMembershipIsPremiumPlus,
-  selectUser,
-  selectUserLocale,
-  selectUserVerifiedEmail,
-  selectHomepageFetched,
-} from 'redux/selectors/user';
+import { selectUser, selectUserLocale, selectUserVerifiedEmail, selectHomepageFetched } from 'redux/selectors/user';
 import { selectUnclaimedRewards } from 'redux/selectors/rewards';
 import { doFetchChannelListMine, doFetchCollectionListMine } from 'redux/actions/claims';
 import { selectMyChannelClaimIds } from 'redux/selectors/claims';
@@ -45,7 +39,6 @@ const select = (state) => ({
   syncFatalError: selectSyncFatalError(state),
   activeChannelClaim: selectActiveChannelClaim(state),
   myChannelClaimIds: selectMyChannelClaimIds(state),
-  hasPremiumPlus: selectOdyseeMembershipIsPremiumPlus(state),
   homepageFetched: selectHomepageFetched(state),
 });
 
