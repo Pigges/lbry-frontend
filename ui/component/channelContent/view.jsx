@@ -1,16 +1,16 @@
 // @flow
 import { SIMPLE_SITE } from 'config';
 import * as CS from 'constants/claim_search';
-import * as ICONS from 'constants/icons';
+// import * as ICONS from 'constants/icons';
 import React, { Fragment } from 'react';
 import HiddenNsfwClaims from 'component/hiddenNsfwClaims';
 import { useHistory } from 'react-router-dom';
 import Button from 'component/button';
 import ClaimListDiscover from 'component/claimListDiscover';
-import Ads from 'web/component/ads';
-import Icon from 'component/common/icon';
+// import Ads from 'web/component/ads';
+// import Icon from 'component/common/icon';
 import LivestreamLink from 'component/livestreamLink';
-import { Form, FormField } from 'component/common/form';
+// import { Form, FormField } from 'component/common/form';
 import ScheduledStreams from 'component/scheduledStreams';
 import { SearchResults } from './internal/searchResults';
 import useFetchLiveStatus from 'effects/use-fetch-live';
@@ -82,10 +82,10 @@ function ChannelContent(props: Props) {
   const isLargeScreen = useIsLargeScreen();
   const dynamicPageSize = isLargeScreen ? Math.ceil(defaultPageSize * 3) : defaultPageSize;
 
-  function handleInputChange(e) {
+  /* function handleInputChange(e) {
     const { value } = e.target;
     setSearchQuery(value);
-  }
+  } */
 
   React.useEffect(() => {
     setSearchQuery('');
@@ -159,7 +159,7 @@ function ChannelContent(props: Props) {
           defaultOrderBy={CS.ORDER_BY_NEW}
           pageSize={dynamicPageSize}
           infiniteScroll={defaultInfiniteScroll}
-          injectedItem={{ node: <Ads type="video" tileLayout={tileLayout} small /> }}
+          /* injectedItem={{ node: <Ads type="video" tileLayout={tileLayout} small /> }}
           meta={
             showFilters && (
               <Form onSubmit={() => {}} className="wunderbar--inline">
@@ -174,7 +174,7 @@ function ChannelContent(props: Props) {
                 />
               </Form>
             )
-          }
+          } */
           subSection={
             <SearchResults
               searchQuery={searchQuery}

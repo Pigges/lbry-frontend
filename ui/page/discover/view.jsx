@@ -13,7 +13,7 @@ import { useIsMobile } from 'effects/use-screensize';
 import analytics from 'analytics';
 import HiddenNsfw from 'component/common/hidden-nsfw';
 import Icon from 'component/common/icon';
-import Ads from 'web/component/ads';
+// import Ads from 'web/component/ads';
 import LbcSymbol from 'component/common/lbc-symbol';
 import I18nMessage from 'component/i18nMessage';
 import moment from 'moment';
@@ -55,7 +55,7 @@ function DiscoverPage(props: Props) {
   const buttonRef = useRef();
   const isHovering = useHover(buttonRef);
   const isMobile = useIsMobile();
-  const isWildWest = window.location.pathname === `/$/${PAGES.WILD_WEST}`;
+  // const isWildWest = window.location.pathname === `/$/${PAGES.WILD_WEST}`;
 
   const urlParams = new URLSearchParams(search);
   const langParam = urlParams.get(CS.LANGUAGE_KEY) || null;
@@ -200,7 +200,7 @@ function DiscoverPage(props: Props) {
         tags={tags}
         hiddenNsfwMessage={<HiddenNsfw type="page" />}
         repostedClaimId={repostedClaim ? repostedClaim.claim_id : null}
-        injectedItem={!isWildWest && { node: <Ads small type="video" tileLayout={tileLayout} /> }}
+        // injectedItem={!isWildWest && { node: <Ads small type="video" tileLayout={tileLayout} /> }}
         // Assume wild west page if no dynamicRouteProps
         // Not a very good solution, but just doing it for now
         // until we are sure this page will stay around

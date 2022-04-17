@@ -18,7 +18,7 @@ import { getLivestreamUris } from 'util/livestream';
 import ScheduledStreams from 'component/scheduledStreams';
 import { splitBySeparator } from 'util/lbryURI';
 import classnames from 'classnames';
-import Ads from 'web/component/ads';
+// import Ads from 'web/component/ads';
 import Meme from 'web/component/meme';
 
 const FYP_SECTION: RowDataItem = {
@@ -59,7 +59,7 @@ function HomePage(props: Props) {
     doFetchActiveLivestreams,
     fetchingActiveLivestreams,
     hideScheduledLivestreams,
-    adBlockerFound,
+    // adBlockerFound,
     homepageOrder,
     doOpenModal,
     hasMembership,
@@ -166,12 +166,12 @@ function HomePage(props: Props) {
         hasSource
         prefixUris={getLivestreamUris(activeLivestreams, options.channelIds)}
         pins={{ urls: pinUrls, claimIds: pinnedClaimIds }}
-        injectedItem={
+        /* injectedItem={
           index === 0 && {
             node: <Ads small type="video" tileLayout />,
             replace: adBlockerFound === false,
           }
-        }
+        } */
         forceShowReposts={id !== 'FOLLOWING'}
       />
     );
